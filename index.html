@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <meta name="description" content="Issue priority, by the gallon. Political focus guided by today's US gas price." />
+  <title>Pump Politics — Issue priority, by the gallon.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="mode-bar" role="group" aria-label="Price source">
+        <button type="button" class="mode-btn active" id="modeLive" aria-pressed="true">Live US gas</button>
+        <button type="button" class="mode-btn" id="modeSim" aria-pressed="false">Simulate</button>
+      </div>
+      <p class="eyebrow">For elected officials &amp; people who yell at the pump</p>
+      <h1 class="logo">Pump Politics</h1>
+      <p class="tagline">Issue priority, by the gallon.</p>
+    </header>
+
+    <section class="gauge-section" aria-label="US gas price gauge">
+      <div class="gauge-wrap">
+        <svg class="gauge" viewBox="0 0 320 200" role="img" aria-labelledby="gaugeTitle">
+          <title id="gaugeTitle">Gas price gauge</title>
+          <path class="gauge-track" d="M 40 170 A 120 120 0 0 1 280 170" />
+          <path class="zone green"  d="M 40.00 170.00 A 120 120 0 0 1 89.47 72.92" />
+          <path class="zone yellow" d="M 89.47 72.92 A 120 120 0 0 1 122.92 55.87" />
+          <path class="zone orange" d="M 122.92 55.87 A 120 120 0 0 1 160.00 50.00" />
+          <path class="zone red"    d="M 160.00 50.00 A 120 120 0 0 1 280.00 170.00" />
+          <g class="ticks" id="ticks"></g>
+          <g id="needle" class="needle" transform="rotate(-90 160 170)">
+            <line x1="160" y1="170" x2="160" y2="62" />
+            <circle cx="160" cy="170" r="10" class="needle-hub" />
+            <circle cx="160" cy="170" r="4" class="needle-pin" />
+          </g>
+          <text x="36" y="188" class="tick-label">$1</text>
+          <text x="78" y="78" class="tick-label">$2.50</text>
+          <text x="148" y="42" class="tick-label mid">$3</text>
+          <text x="198" y="78" class="tick-label">$3.50</text>
+          <text x="268" y="188" class="tick-label">$6+</text>
+        </svg>
+        <div class="price-block">
+          <p class="price" id="priceDisplay">—.— / gal</p>
+          <p class="as-of" id="asOf">Fetching live AAA national average…</p>
+          <p class="zone-pill" id="zonePill">…</p>
+        </div>
+      </div>
+
+      <div class="sim-panel" id="simPanel" hidden>
+        <div class="sim-badge">PRETEND MODE</div>
+        <label class="sim-label" for="simSlider">Drag pretend price ($1–$6)</label>
+        <div class="sim-row">
+          <input type="range" id="simSlider" min="1" max="6" step="0.01" value="3.25" />
+          <span class="sim-value" id="simValue">$3.25</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="action">
+      <button type="button" class="cta" id="ctaBtn">
+        What issue should I focus on?
+      </button>
+
+      <div class="slot-machine" id="slotMachine" hidden aria-live="polite" aria-atomic="true">
+        <div class="slot-frame">
+          <div class="slot-window">
+            <div class="slot-reel" id="slotReel"></div>
+          </div>
+          <p class="slot-hint" id="slotHint">Spinning the issue wheel…</p>
+        </div>
+      </div>
+
+      <div class="result" id="result" hidden>
+        <p class="result-zone" id="resultZone"></p>
+        <h2 class="result-headline" id="resultHeadline"></h2>
+        <ul class="result-list" id="resultList"></ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Live US regular average via AAA · satire, not campaign advice</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
