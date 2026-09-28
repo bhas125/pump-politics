@@ -2,7 +2,7 @@
 
 **Issue priority, by the gallon.**
 
-A one-screen political satire web app: a gas-gauge needle points at today's US regular national average. Tap **What issue should I focus on?** for a ~1.5s slot-machine spin, then a stack of five punchy issue options for that price band.
+A one-screen political satire web app: a gas-gauge needle points at today's US regular national average. Tap **What issue should I focus on?** for a ~1.5s slot-machine spin, then a **featured (hero) answer** for that price band with the other options listed underneath.
 
 Answers stay hidden until you click the CTA.
 
@@ -35,16 +35,16 @@ Open [http://localhost:8765](http://localhost:8765). No build step, no API keys,
 
 1. Default: no answers visible.
 2. Click **What issue should I focus on?** → ~1.5s slot-machine roll through issues/zones.
-3. Reveal: five answers for the current price band.
+3. Reveal: the **landed answer stays as the big hero result**; the other answers for that zone sit underneath as a secondary list.
 
-## Issue stacks
+## Issue stacks (tone by zone)
 
-| Zone   | Range        | Theme                                      |
-|--------|--------------|--------------------------------------------|
-| Green  | $1.00–$2.50  | Kindness / soft virtue vibes               |
-| Yellow | $2.50–$3.00  | Tax policy + trans kids (+ close variants) |
-| Orange | $3.00–$3.50  | Economy + crime                            |
-| Red    | $3.50–$6.00+ | “It's the economy, stupid” + close variants|
+| Zone   | Range        | Tone |
+|--------|--------------|------|
+| Green  | $1.00–$2.50  | Bob Ross calm — kindness, happy little trees, soft virtue |
+| Yellow | $2.50–$3.00  | Sensible campaign messaging — tax policy + trans kids |
+| Orange | $3.00–$3.50  | Kitchen-table messaging — economy + crime |
+| Red    | $3.50–$6.00+ | Hysterical populist pocketbook chants — Higher Wages! Lower Prices! Cheap Houses! |
 
 ## How gas price is sourced (hosted + local)
 

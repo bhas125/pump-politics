@@ -3,6 +3,7 @@
   const MAX = 6.0;
   const DEMO_PRICE = 3.21;
   const SPIN_MS = 1500;
+  const PIVOT = { x: 160, y: 170 };
 
   const ZONES = [
     {
@@ -10,13 +11,28 @@
       min: 1.0,
       max: 2.5,
       label: "Green · Cheap gas vibes",
-      headline: "Kindness era",
+      headline: "Happy little days",
       answers: [
-        { issue: "Kindness & bipartisanship", line: "Hug across the aisle. Maybe even share a salad." },
-        { issue: "Community gardens", line: "Nothing says leadership like dirt under your nails." },
-        { issue: "Civility town halls", line: "Lower voices, higher approval. Wild concept." },
-        { issue: "Puppy photo ops", line: "Bipartisan fluff. Literally untouchable." },
-        { issue: "National nap time", line: "Everyone's chill. Don't mess it up." },
+        {
+          issue: "Happy little trees",
+          line: "Plant one for a neighbor. There are no mistakes — only happy accidents in policy.",
+        },
+        {
+          issue: "Kindness across the aisle",
+          line: "A soft hello. A shared bench. Maybe we all go home feeling a little lighter.",
+        },
+        {
+          issue: "Community gardens",
+          line: "Dirt under the nails, tomatoes on the table. Gentle leadership smells like basil.",
+        },
+        {
+          issue: "Quiet town halls",
+          line: "Lower voices, warm coffee, room for every story. Calm is a virtue too.",
+        },
+        {
+          issue: "National nap time",
+          line: "Everyone's soft around the edges. Don't rush the clouds — they're beautiful.",
+        },
       ],
     },
     {
@@ -24,13 +40,28 @@
       min: 2.5,
       max: 3.0,
       label: "Yellow · Getting spicy",
-      headline: "Culture + taxes",
+      headline: "Taxes & culture",
       answers: [
-        { issue: "Tax policy", line: "When gas ticks up, so do the spreadsheets." },
-        { issue: "Trans kids", line: "Cable's favorite secondary story. Handle with care / ratings." },
-        { issue: "Tax credits for vibes", line: "Write it off. Literally and spiritually." },
-        { issue: "School board soundbites", line: "Local fights, national airtime. Classic yellow-zone move." },
-        { issue: "IRS reform theater", line: "Audit the rich / spare the middle — pick your chant." },
+        {
+          issue: "Tax policy",
+          line: "Credits, brackets, and who pays what — the spreadsheets are back on the stump.",
+        },
+        {
+          issue: "Trans kids",
+          line: "Parents, schools, and statehouses. Handle the debate with seriousness, not cable volume.",
+        },
+        {
+          issue: "Family tax credits",
+          line: "Child care, EITC, middle-class relief — pocketbook policy with a culture-war backdrop.",
+        },
+        {
+          issue: "School board fights",
+          line: "Curriculum and bathrooms become national airtime. Local races, national stakes.",
+        },
+        {
+          issue: "IRS & fairness",
+          line: "Audit capacity, loopholes, and who actually gets checked — classic yellow-zone messaging.",
+        },
       ],
     },
     {
@@ -40,11 +71,26 @@
       label: "Orange · Voters are restless",
       headline: "Kitchen-table mode",
       answers: [
-        { issue: "The economy", line: "Point at charts. Speak slowly. Repeat weekly." },
-        { issue: "Crime", line: "Tough-on-it, soft-on-nuance. Peak orange energy." },
-        { issue: "Jobs, jobs, jobs", line: "Three syllables. Infinite stump speeches." },
-        { issue: "Border + budgets", line: "Two problems, one podium. Don't drop either." },
-        { issue: "Inflation explainers", line: "Eggs, rent, and gallons — the holy trinity." },
+        {
+          issue: "The economy",
+          line: "Jobs, wages, and grocery receipts. Speak plainly; voters are already counting.",
+        },
+        {
+          issue: "Crime",
+          line: "Safe streets, clear consequences, real prevention — tough and practical, not theatrical.",
+        },
+        {
+          issue: "Jobs, jobs, jobs",
+          line: "Hiring, training, and keeping work local. Three syllables that still win rooms.",
+        },
+        {
+          issue: "Border & budgets",
+          line: "Order at the border, discipline in spending. Two pressures, one podium.",
+        },
+        {
+          issue: "Inflation explainers",
+          line: "Eggs, rent, and gallons — name the pain, then name the fix.",
+        },
       ],
     },
     {
@@ -52,18 +98,33 @@
       min: 3.5,
       max: 6.0,
       label: "Red · Panic at the pump",
-      headline: "It's the economy, stupid",
+      headline: "POCKETBOOK RAGE",
       answers: [
-        { issue: "It's the economy, stupid", line: "Carville called it. Your donors feel it. Stop pivoting." },
-        { issue: "Gas prices. Period.", line: "No culture war can outrun a $4+ gallon." },
-        { issue: "Wallets over culture wars", line: "The pump is polling better than your slogan." },
-        { issue: "Emergency economic messaging", line: "Clear the calendar. Clear the subject line." },
-        { issue: "Pocketbook politics only", line: "If it doesn't lower the receipt, it doesn't ship." },
+        {
+          issue: "Higher Wages!",
+          line: "PAYCHECK UP. BILLS DOWN. STOP NICKEL-AND-DIMING WORKING PEOPLE!",
+        },
+        {
+          issue: "Lower Prices!",
+          line: "GAS. GROCERIES. EVERYTHING. CUT THE COST OF LIVING — NOW!",
+        },
+        {
+          issue: "Cheap Houses!",
+          line: "BUILD THEM. SELL THEM. STOP LOCKING FAMILIES OUT OF A HOME!",
+        },
+        {
+          issue: "Rental Assistance!",
+          line: "RENT IS A WEAPON. HELP PEOPLE STAY HOUSED — THIS MONTH!",
+        },
+        {
+          issue: "Cut Our Bills!",
+          line: "UTILITIES. INSURANCE. THE PUMP. WE'RE BROKE AND WE'RE FURIOUS!",
+        },
       ],
     },
   ];
 
-  // Pool of short labels for the slot reel (zones + sample issues)
+  // Pool of short labels for the slot reel (zone answers + headlines)
   const SLOT_POOL = [];
   ZONES.forEach((z) => {
     SLOT_POOL.push({ text: z.headline, zone: z.id });
@@ -78,7 +139,10 @@
     ctaBtn: document.getElementById("ctaBtn"),
     result: document.getElementById("result"),
     resultZone: document.getElementById("resultZone"),
-    resultHeadline: document.getElementById("resultHeadline"),
+    resultHero: document.getElementById("resultHero"),
+    resultHeroIssue: document.getElementById("resultHeroIssue"),
+    resultHeroLine: document.getElementById("resultHeroLine"),
+    resultMoreLabel: document.getElementById("resultMoreLabel"),
     resultList: document.getElementById("resultList"),
     ticks: document.getElementById("ticks"),
     modeLive: document.getElementById("modeLive"),
@@ -99,11 +163,13 @@
   let current = { price: null, zone: null };
   let spinning = false;
   let answersRevealed = false;
+  let landedAnswer = null; // the featured answer from the last spin
   let spinTimer = null;
 
   function priceToAngle(price) {
     const clamped = Math.min(MAX, Math.max(MIN, price));
     const t = (clamped - MIN) / (MAX - MIN);
+    // Semicircle: $1 → -90° (left), $3.50 → 0° (up), $6 → +90° (right)
     return -90 + t * 180;
   }
 
@@ -116,7 +182,10 @@
 
   function drawTicks() {
     const marks = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
-    const cx = 160, cy = 170, rOuter = 131, rInner = 109;
+    const cx = PIVOT.x,
+      cy = PIVOT.y,
+      rOuter = 131,
+      rInner = 109;
     els.ticks.innerHTML = marks
       .map((p) => {
         const deg = priceToAngle(p);
@@ -130,16 +199,17 @@
       .join("");
   }
 
+  /** Rotate needle around fixed SVG viewBox pivot (160, 170). */
   function setNeedle(price, animate) {
     const angle = priceToAngle(price);
     if (!animate) {
       els.needle.style.transition = "none";
-      els.needle.setAttribute("transform", `rotate(${angle} 160 170)`);
+      els.needle.style.transform = `rotate(${angle}deg)`;
       void els.needle.getBoundingClientRect();
       els.needle.style.transition = "";
       return;
     }
-    els.needle.setAttribute("transform", `rotate(${angle} 160 170)`);
+    els.needle.style.transform = `rotate(${angle}deg)`;
   }
 
   function formatPrice(price) {
@@ -148,10 +218,12 @@
 
   function hideAnswers() {
     answersRevealed = false;
+    landedAnswer = null;
     els.result.hidden = true;
     els.resultList.innerHTML = "";
     els.resultZone.textContent = "";
-    els.resultHeadline.textContent = "";
+    if (els.resultHeroIssue) els.resultHeroIssue.textContent = "";
+    if (els.resultHeroLine) els.resultHeroLine.textContent = "";
   }
 
   function hideSlot() {
@@ -174,7 +246,7 @@
 
     if (meta.animateFromLeft) {
       els.needle.style.transition = "none";
-      els.needle.setAttribute("transform", "rotate(-90 160 170)");
+      els.needle.style.transform = "rotate(-90deg)";
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           els.needle.style.transition = "";
@@ -185,7 +257,7 @@
       setNeedle(price, meta.animate !== false);
     }
 
-    // If answers already revealed and zone still matches, quietly refresh stack.
+    // If answers already revealed and zone still matches, keep landed hero + refresh secondaries.
     // If zone changed (e.g. sim drag), hide until user clicks again.
     if (answersRevealed && !spinning) {
       if (zoneChanged) {
@@ -206,13 +278,25 @@
       void els.result.offsetWidth;
       els.result.style.animation = "";
     }
+
+    // Persist the landed answer as hero; fall back to first if missing
+    const hero =
+      landedAnswer && z.answers.some((a) => a.issue === landedAnswer.issue)
+        ? landedAnswer
+        : z.answers[0];
+    landedAnswer = hero;
+
     els.resultZone.textContent = z.label;
-    els.resultHeadline.textContent = z.headline;
-    els.resultList.innerHTML = z.answers
+    els.result.dataset.zone = z.id;
+    els.resultHeroIssue.textContent = hero.issue;
+    els.resultHeroLine.textContent = hero.line;
+
+    const others = z.answers.filter((a) => a.issue !== hero.issue);
+    els.resultMoreLabel.hidden = others.length === 0;
+    els.resultList.innerHTML = others
       .map(
-        (a, i) => `
-      <li class="answer">
-        <span class="answer-num">${i + 1}</span>
+        (a) => `
+      <li class="answer secondary">
         <div>
           <p class="answer-issue">${a.issue}</p>
           <p class="answer-line">${a.line}</p>
@@ -253,7 +337,10 @@
     els.ctaBtn.setAttribute("aria-busy", "true");
 
     const z = current.zone;
-    const finalItem = { text: z.headline, zone: z.id };
+    // Land on one random answer from this zone — that becomes the hero
+    const pick = z.answers[Math.floor(Math.random() * z.answers.length)];
+    landedAnswer = pick;
+    const finalItem = { text: pick.issue, zone: z.id };
     const items = buildReel(finalItem);
     const itemH = 56;
 
@@ -288,7 +375,7 @@
       els.ctaBtn.disabled = false;
       els.ctaBtn.removeAttribute("aria-busy");
 
-      // Brief beat, then hide slot and reveal answers
+      // Brief beat, then hide slot and reveal hero + secondary answers
       setTimeout(() => {
         hideSlot();
         renderAnswers(false);
@@ -417,6 +504,24 @@
     }
   }
 
+  // Expose for verification / screenshots
+  window.__pumpPolitics = {
+    priceToAngle,
+    zoneFor,
+    setNeedle,
+    setSimPrice(p) {
+      simPrice = p;
+      setMode("simulate");
+      applyDisplay(simPrice, {
+        asOfText: "PRETEND · Simulate mode — not live data",
+        animate: false,
+      });
+    },
+    getAngle: () => priceToAngle(current.price),
+    getNeedleTransform: () => els.needle.style.transform,
+    ZONES,
+  };
+
   els.ctaBtn.addEventListener("click", runSlotSpin);
   els.modeLive.addEventListener("click", () => setMode("live"));
   els.modeSim.addEventListener("click", () => setMode("simulate"));
@@ -432,6 +537,8 @@
   });
 
   drawTicks();
+  // Initial needle at left ($1) until price loads — CSS rotate around fixed pivot
+  els.needle.style.transform = "rotate(-90deg)";
   setMode("live");
   fetchLivePrice();
 })();
