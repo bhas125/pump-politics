@@ -8,7 +8,10 @@ Answers stay hidden until you click the CTA.
 
 ## Live preview
 
-See the deployed URL in the repo / Vercel project once pushed.
+- **Live site:** https://pump-politics.vercel.app
+- **Repo:** https://github.com/bhas125/pump-politics
+
+Gas price on the hosted preview uses Vercel serverless `GET /api/gas-price` (scrapes AAA). The browser falls back to CORS proxies if that endpoint is unavailable.
 
 ## Open / run locally
 
